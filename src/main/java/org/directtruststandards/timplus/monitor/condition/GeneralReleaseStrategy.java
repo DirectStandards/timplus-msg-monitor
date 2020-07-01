@@ -10,6 +10,8 @@ import org.directtruststandards.timplus.monitor.tx.model.Tx;
 import org.directtruststandards.timplus.monitor.tx.model.TxDetail;
 import org.directtruststandards.timplus.monitor.tx.model.TxDetailType;
 import org.directtruststandards.timplus.monitor.tx.model.TxStanzaType;
+import org.jxmpp.jid.Jid;
+import org.jxmpp.jid.impl.JidCreate;
 
 public class GeneralReleaseStrategy extends AbstractReleaseStrategy
 {
@@ -53,8 +55,16 @@ public class GeneralReleaseStrategy extends AbstractReleaseStrategy
 		// add the original recipient list to a map of recipients to status
 		final Map<String, RecipientResponseStatus> recipStatuses = new HashMap<String, RecipientResponseStatus>();
 		for (String recip : originalRecipDetail.getDetailValue().split(","))
-			recipStatuses.put(recip.trim(), new RecipientResponseStatus(recip.trim()));
-		
+		{
+			
+			try
+			{
+				// only use bare JIDs for comparison
+				final Jid recipJid = JidCreate.from(recip.trim()).asBareJid();
+				recipStatuses.put(recipJid.toString(), new RecipientResponseStatus(recipJid.toString()));
+			}
+			catch (Exception e) {/* no-op */}
+		}
 		for (Tx tx : txs)
 		{
 			final TxDetail originalRecip = tx.getDetail(TxDetailType.ORIGINAL_RECIPIENT);
@@ -67,11 +77,18 @@ public class GeneralReleaseStrategy extends AbstractReleaseStrategy
 				   case AMP:
 				   case MESSAGE_ERROR:
 				   {
-					   final RecipientResponseStatus recipStatus = recipStatuses.get(originalRecip.getDetailValue().trim());
-					   if (recipStatus != null)
-						   recipStatus.addReceivedStatus((tx.getStanzaType() == TxStanzaType.AMP) 
-								   ? RecipientResponseStatus.AMPReceived : RecipientResponseStatus.ErrorReceived);
-					   break;
+					   
+					   try
+					   {
+						// use the original recipient's bare JID to compare
+						   final Jid recipJid = JidCreate.from(originalRecip.getDetailValue().trim()).asBareJid();
+						   final RecipientResponseStatus recipStatus = recipStatuses.get(recipJid.toString());
+						   if (recipStatus != null)
+							   recipStatus.addReceivedStatus((tx.getStanzaType() == TxStanzaType.AMP) 
+									   ? RecipientResponseStatus.AMPReceived : RecipientResponseStatus.ErrorReceived);
+						   break;
+					   }
+					   catch (Exception e) {/*no-op*/}
 				   }
 
 				}

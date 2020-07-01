@@ -61,8 +61,8 @@ public class MonitorToErrorMessageTransformer extends AbstractTransformer
 			try
 			{
 				// Create the base message with the required attributes
-				final Jid to = JidCreate.from(originalTx.getDetail(TxDetailType.FROM).getDetailValue()).asBareJid();
-				final Jid from = JidCreate.from(incompleteRecip).asBareJid();
+				final Jid to = JidCreate.from(originalTx.getDetail(TxDetailType.FROM).getDetailValue());
+				final Jid from = JidCreate.from(incompleteRecip);
 				
 				final org.jivesoftware.smack.packet.Message msgStanza = 
 						new org.jivesoftware.smack.packet.Message(to, org.jivesoftware.smack.packet.Message.Type.error);
