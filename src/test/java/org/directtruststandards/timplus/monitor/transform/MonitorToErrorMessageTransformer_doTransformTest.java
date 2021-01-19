@@ -1,7 +1,7 @@
 package org.directtruststandards.timplus.monitor.transform;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,7 +15,7 @@ import org.directtruststandards.timplus.monitor.test.TestUtils;
 import org.directtruststandards.timplus.monitor.tx.model.Tx;
 import org.directtruststandards.timplus.monitor.tx.model.TxDetailType;
 import org.directtruststandards.timplus.monitor.tx.model.TxStanzaType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 

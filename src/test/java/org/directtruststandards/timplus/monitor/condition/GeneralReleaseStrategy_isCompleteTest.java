@@ -1,7 +1,7 @@
 package org.directtruststandards.timplus.monitor.condition;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import java.util.UUID;
 
 import org.directtruststandards.timplus.monitor.test.TestUtils;
 import org.directtruststandards.timplus.monitor.tx.model.Tx;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class GeneralReleaseStrategy_isCompleteTest 
 {

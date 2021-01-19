@@ -1,7 +1,7 @@
 package org.directtruststandards.timplus.monitor.route;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -10,8 +10,8 @@ import org.directtruststandards.timplus.monitor.condition.TxReleaseStrategy;
 import org.directtruststandards.timplus.monitor.test.RouteConfigurations;
 import org.directtruststandards.timplus.monitor.test.TestUtils;
 import org.directtruststandards.timplus.monitor.tx.model.Tx;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.integration.channel.DirectChannel;
@@ -19,9 +19,9 @@ import org.springframework.integration.channel.QueueChannel;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes=RouteConfigurations.AggregatorOnlyRoute.class)
 @TestPropertySource(locations = "classpath:properties/normalChatMonitor.properties")
 public class MonitorChatMessageTest

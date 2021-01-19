@@ -1,7 +1,7 @@
 package org.directtruststandards.timplus.monitor.condition;
 
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,7 +9,7 @@ import java.util.UUID;
 
 import org.directtruststandards.timplus.monitor.test.TestUtils;
 import org.directtruststandards.timplus.monitor.tx.model.Tx;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class GeneralReleaseStrategy_getIncompleteRecipientsTest 
 {

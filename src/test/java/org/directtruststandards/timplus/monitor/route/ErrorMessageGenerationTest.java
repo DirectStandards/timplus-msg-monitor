@@ -1,6 +1,6 @@
 package org.directtruststandards.timplus.monitor.route;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -8,8 +8,8 @@ import java.util.UUID;
 import org.directtruststandards.timplus.monitor.condition.TxReleaseStrategy;
 import org.directtruststandards.timplus.monitor.test.RouteConfigurations;
 import org.directtruststandards.timplus.monitor.test.TestUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,9 +18,9 @@ import org.springframework.integration.channel.QueueChannel;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes=RouteConfigurations.AggregatorWithErrorGenerationRoute.class)
 @TestPropertySource(locations = "classpath:properties/timeoutChatMonitor.properties")
 public class ErrorMessageGenerationTest

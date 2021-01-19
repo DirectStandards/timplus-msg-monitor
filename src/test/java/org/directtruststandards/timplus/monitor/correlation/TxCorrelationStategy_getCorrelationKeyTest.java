@@ -12,60 +12,73 @@ import org.directtruststandards.timplus.monitor.tx.model.Tx;
 import org.directtruststandards.timplus.monitor.tx.model.TxDetail;
 import org.directtruststandards.timplus.monitor.tx.model.TxDetailType;
 import org.directtruststandards.timplus.monitor.tx.model.TxStanzaType;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 
 
 public class TxCorrelationStategy_getCorrelationKeyTest 
 {
-	@Test(expected = IllegalStateException.class)
+	@Test
 	public void testEvaluate_emptyDetails_assertException()
 	{
-		final TxCorrelationStategy exp = new TxCorrelationStategy();
-		
-		final Tx tx = new Tx(TxStanzaType.MESSAGE, new HashMap<TxDetailType, TxDetail>());
-		
-		final Message<?> msg = new GenericMessage<Tx>(tx);
-		
-		exp.getCorrelationKey(msg);
+		Assertions.assertThrows(IllegalStateException.class, () ->
+		{
+			final TxCorrelationStategy exp = new TxCorrelationStategy();
+			
+			final Tx tx = new Tx(TxStanzaType.MESSAGE, new HashMap<TxDetailType, TxDetail>());
+			
+			final Message<?> msg = new GenericMessage<Tx>(tx);
+			
+			exp.getCorrelationKey(msg);
+		});
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test
 	public void testEvaluate_messageStanza_noMsgId_assertException()
 	{
-		final TxCorrelationStategy exp = new TxCorrelationStategy();
-		
-		final Tx tx = TestUtils.makeMessageStanza("", "me@test.com", "you@test.com", org.jivesoftware.smack.packet.Message.Type.chat.name());
-		
-		final Message<?> msg = new GenericMessage<Tx>(tx);
-		
-		exp.getCorrelationKey(msg);
+		Assertions.assertThrows(IllegalStateException.class, () ->
+		{
+			final TxCorrelationStategy exp = new TxCorrelationStategy();
+			
+			final Tx tx = TestUtils.makeMessageStanza("", "me@test.com", "you@test.com", org.jivesoftware.smack.packet.Message.Type.chat.name());
+			
+			final Message<?> msg = new GenericMessage<Tx>(tx);
+			
+			exp.getCorrelationKey(msg);
+		});
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test
 	public void testEvaluate_messageStanza_emptyMsgId_assertException()
 	{
-		final TxCorrelationStategy exp = new TxCorrelationStategy();
-		
-		final Map<TxDetailType, TxDetail> details = new HashMap<>();
-		details.put(TxDetailType.MSG_ID, new TxDetail(TxDetailType.MSG_ID, ""));
-		
-		final Tx tx = new Tx(TxStanzaType.MESSAGE, details);
-		
-		final Message<?> msg = new GenericMessage<Tx>(tx);
-		
-		exp.getCorrelationKey(msg);
+		Assertions.assertThrows(IllegalStateException.class, () ->
+		{
+			final TxCorrelationStategy exp = new TxCorrelationStategy();
+			
+			final Map<TxDetailType, TxDetail> details = new HashMap<>();
+			details.put(TxDetailType.MSG_ID, new TxDetail(TxDetailType.MSG_ID, ""));
+			
+			final Tx tx = new Tx(TxStanzaType.MESSAGE, details);
+			
+			final Message<?> msg = new GenericMessage<Tx>(tx);
+			
+			exp.getCorrelationKey(msg);
+		});
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testEvaluate_invalidPayloadType_assertException()
 	{
-		final TxCorrelationStategy exp = new TxCorrelationStategy();
-		
-		final Message<?> msg = new GenericMessage<Object>(new Object());
-		
-		exp.getCorrelationKey(msg);
+		Assertions.assertThrows(IllegalArgumentException.class, () ->
+		{
+			final TxCorrelationStategy exp = new TxCorrelationStategy();
+			
+			final Message<?> msg = new GenericMessage<Object>(new Object());
+			
+			exp.getCorrelationKey(msg);
+		});
 	}
 	
 	@Test

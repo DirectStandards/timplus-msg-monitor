@@ -1,12 +1,14 @@
 package org.directtruststandards.timplus.monitor.resource;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 
 import org.directtruststandards.timplus.monitor.tx.model.Tx;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.MessageChannel;
 
@@ -14,12 +16,15 @@ import reactor.core.publisher.Mono;
 
 public class TxsResource_addTxTest
 {
-	@Test(expected=IllegalStateException.class)
+	@Test
 	public void testAddTx_nullMessageChannel_assertExcecption()
 	{
-		final Tx tx = mock(Tx.class);
-		
-		new TxsResource(null).addTx(tx);
+		Assertions.assertThrows(IllegalStateException.class, () ->
+		{
+			final Tx tx = mock(Tx.class);
+			
+			new TxsResource(null).addTx(tx);
+		});
 	}
 	
 	@Test

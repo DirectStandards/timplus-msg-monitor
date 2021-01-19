@@ -5,15 +5,15 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.directtruststandards.timplus.monitor.test.BaseTestPlan;
 import org.directtruststandards.timplus.monitor.test.TestUtils;
 import org.directtruststandards.timplus.monitor.test.TestWebApplication;
 import org.directtruststandards.timplus.monitor.tx.model.Tx;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,10 +26,10 @@ import org.springframework.integration.channel.QueueChannel;
 import org.springframework.messaging.Message;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.HttpClientErrorException;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = TestWebApplication.class, webEnvironment = WebEnvironment.DEFINED_PORT)
 @DirtiesContext
 @TestPropertySource(locations = "classpath:properties/timeoutChatMonitor.properties")
